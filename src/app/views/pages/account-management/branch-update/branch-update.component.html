@@ -1,0 +1,81 @@
+<nav class="page-breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a routerLink=".">Account-Management</a></li>
+    <li class="breadcrumb-item"><a routerLink="/account-management/branches">Branch List</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Barnch Update</li>
+  </ol>
+</nav>
+<div class="row" *ngIf="screeenAuth">
+  <div class="card rounded col-sm-12">
+    <div class="card-body">
+      <div class="d-flex align-items-center justify-content-between mb-2">
+      </div>
+      <div class="mt-3">
+        <form class="forms-sample" [formGroup]="BranchUpdateForm" (ngSubmit)="onSubmit()">
+          <div class="row">
+            <div class="col-sm-4">
+              <div class="form-group">
+                <label for="BranchId">Brach ID</label>
+                <input type="text" disabled placeholder="Employee ID"
+                  formControlName="BranchId" class="form-control"
+                  [ngClass]="{ 'is-invalid': submitted && f.BranchId.errors }" />
+                <div *ngIf="submitted && f.BranchId.errors" class="invalid-feedback">
+                  <div *ngIf="f.BranchId.errors.required">Bracnch ID is required</div>
+                </div>
+              </div>
+              <!-- <input type="password" class="form-control" id="password" autocomplete="current-password" placeholder="Password" value="12345678"> -->
+            </div>
+            <div class="col-sm-4">
+              <div class="form-group">
+                <label for="BranchName">Branch Name</label>
+                <input type="text" placeholder="Branch Name"
+                  formControlName="BranchName" class="form-control"
+                  [ngClass]="{ 'is-invalid': submitted && f.BranchName.errors }" />
+                <div *ngIf="submitted && f.BranchName.errors" class="invalid-feedback">
+                  <div *ngIf="f.BranchName.errors.required">Branch name is required</div>
+                </div>
+                <!-- <input type="password" class="form-control" id="password" autocomplete="current-password" placeholder="Password" value="12345678"> -->
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="form-group">
+                <label for="BranchAddress">Branch Address</label>
+                <input type="text" placeholder="Branch Address"
+                  formControlName="BranchAddress" class="form-control"
+                  [ngClass]="{ 'is-invalid': submitted && f.BranchAddress.errors }" />
+                <div *ngIf="submitted && f.BranchAddress.errors" class="invalid-feedback">
+                  <div *ngIf="f.BranchAddress.errors.required">Last name is required</div>
+                </div>
+                <!-- <input type="password" class="form-control" id="password" autocomplete="current-password" placeholder="Password" value="12345678"> -->
+              </div>
+            </div>
+
+          </div>
+          <div class="mt-3">
+            <button type="submit" class="btn btn-primary mr-2 mb-2 mb-md-0 btn-right">Update</button>
+            <button type="button" class="btn btn-primary mr-2 mb-2 mb-md-0 btn-right"
+              (click)="backToEmployees()">Back</button>
+
+            <!-- <button type="button" class="btn btn-outline-primary btn-icon-text mb-2 mb-md-0">
+            <i class="feather icon-twitter btn-icon-prepend"></i>
+            Login with twitter
+          </button> -->
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="page-wrapper full-page" *ngIf="!screeenAuth">
+  <div class="page-content d-flex align-items-center justify-content-center">
+
+    <div class="row w-100 mx-0 auth-page">
+      <div class="col-md-8 col-xl-6 mx-auto d-flex flex-column align-items-center">
+        <img src="assets/images/404.svg" class="img-fluid mb-2" alt="401">
+        <h1 class="font-weight-bold mb-22 mt-2 tx-80 text-muted">SORRY!</h1>
+          <h4 class="mb-2">You'r not Authorized. Please contact admin</h4>
+      </div>
+    </div>
+
+  </div>
+</div>

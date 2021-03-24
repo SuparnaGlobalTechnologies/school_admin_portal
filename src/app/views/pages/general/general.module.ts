@@ -1,0 +1,73 @@
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+
+import { FeahterIconModule } from '../../../core/feather-icon/feather-icon.module';
+
+import { NgbAccordionModule, NgbDropdownModule, NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
+
+import { GeneralComponent } from './general.component';
+import { BlankComponent } from './blank/blank.component';
+import { FaqComponent } from './faq/faq.component';
+import { InvoiceComponent } from './invoice/invoice.component';
+import { ProfileComponent } from './profile/profile.component';
+import { PricingComponent } from './pricing/pricing.component';
+import { TimelineComponent } from './timeline/timeline.component';
+import { Routes, RouterModule } from '@angular/router';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ShowHidePasswordModule } from 'ngx-show-hide-password';
+// Ngx-custom-validators
+import { CustomFormsModule } from 'ngx-custom-validators';
+
+const routes: Routes = [
+  {
+    path: '',
+    component: GeneralComponent,
+    children: [
+      {
+        path: '',
+        redirectTo: 'blank-page',
+        pathMatch: 'full'
+      },
+      {
+        path: 'blank-page',
+        component: BlankComponent
+      },
+      // {
+      //   path: 'faq',
+      //   component: FaqComponent
+      // },
+      // {
+      //   path: 'invoice',
+      //   component: InvoiceComponent
+      // },
+      {
+        path: 'profile',
+        component: ProfileComponent
+      },
+      // {
+      //   path: 'pricing',
+      //   component: PricingComponent
+      // },
+      // {
+      //   path: 'timeline',
+      //   component: TimelineComponent
+      // }
+    ]
+  }
+]
+
+@NgModule({
+  declarations: [GeneralComponent, BlankComponent, FaqComponent, InvoiceComponent, ProfileComponent, PricingComponent, TimelineComponent],
+  imports: [
+    CommonModule,
+    RouterModule.forChild(routes),
+    FeahterIconModule,
+    NgbAccordionModule,
+    NgbDropdownModule,
+    NgbTooltipModule,
+    FormsModule, ReactiveFormsModule,
+    CustomFormsModule,
+    ShowHidePasswordModule
+  ]
+})
+export class GeneralModule { }

@@ -1,0 +1,179 @@
+<nav class="page-breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a routerLink=".">User-Management</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Employees</li>
+  </ol>
+</nav>
+
+<div class="row" *ngIf="screeenAuth">
+  <div class="col-md-12 ">
+    <button mat-raised-button color="primary" class="fl-right" (click)="stuDivSwitch(1)" >Create Student</button> <br><br>
+  </div>
+  <div class="col-md-12 " *ngIf="createStuDiv" @fade>
+    <div class="card">
+      <div class="card-body">
+        <h6 class="card-title">New Employee</h6>
+        <form #formDirective="ngForm" class="forms-sample" [formGroup]="NewStuForm" (ngSubmit)="onSubmit()">
+          <div class="row">
+            <div class="col-sm-4">
+              <div class="form-group">
+                <label for="StuFirstName">First Name</label>
+                <input type="text" placeholder="First Name"
+                  formControlName="StuFirstName" class="form-control"
+                  [ngClass]="{ 'is-invalid': submitted && f.StuFirstName.errors }" />
+                <div *ngIf="submitted && f.StuFirstName.errors" class="invalid-feedback">
+                  <div *ngIf="f.StuFirstName.errors.required">Firstname is required</div>
+                </div>
+              </div>
+              <!-- <input type="password" class="form-control" id="password" autocomplete="current-password" placeholder="Password" value="12345678"> -->
+            </div>
+            <div class="col-sm-4">
+              <div class="form-group">
+                <label for="StuLastName"> Last Name</label>
+                <input type="text" placeholder="Last Name"
+                  formControlName="StuLastName" class="form-control"
+                  [ngClass]="{ 'is-invalid': submitted && f.StuLastName.errors }" />
+                <div *ngIf="submitted && f.StuLastName.errors" class="invalid-feedback">
+                  <div *ngIf="f.StuLastName.errors.required">Lastname is required</div>
+                </div>
+              </div>
+              <!-- <input type="password" class="form-control" id="password" autocomplete="current-password" placeholder="Password" value="12345678"> -->
+            </div>
+            <div class="col-sm-4">
+              <div class="form-group">
+                <label for="StuPhone">Phone</label>
+                <input type="text" placeholder="Phone"
+                  formControlName="StuPhone" class="form-control"
+                  [ngClass]="{ 'is-invalid': submitted && f.StuPhone.errors }" on-focusout="CheckPhoneExists()"/>
+                <div *ngIf="submitted && f.StuPhone.errors" class="invalid-feedback">
+                  <div *ngIf="f.StuPhone.errors.required">phone is required</div>
+                  <div *ngIf="f.StuPhone.errors.pattern">phone invalid</div>
+                </div>
+                <div *ngIf="checkPhone" class="error">
+                  Phone already registered
+                 </div>
+              </div>
+              <!-- <input type="password" class="form-control" id="password" autocomplete="current-password" placeholder="Password" value="12345678"> -->
+            </div>
+            <div class="col-sm-4">
+              <div class="form-group">
+                <label for="StuEmail">Email</label>
+                <input type="text" placeholder="Email"
+                  formControlName="StuEmail" class="form-control"
+                  [ngClass]="{ 'is-invalid': submitted && f.StuEmail.errors }"   on-focusout="CheckMailExists()"/>
+                <div *ngIf="submitted && f.StuEmail.errors" class="invalid-feedback">
+                  <div *ngIf="f.StuEmail.errors.required">Email is required</div>
+                  <div *ngIf="f.StuEmail.errors.email">Email is Invalid</div>
+                </div>
+                <div *ngIf="checkEmail" class="error">
+                 Email already registered
+                </div>
+              </div>
+              <!-- <input type="password" class="form-control" id="password" autocomplete="current-password" placeholder="Password" value="12345678"> -->
+            </div>
+            <div class="col-sm-4">
+              <div class="form-group">
+                <label for="Grades">Grade</label>
+                <ng-select
+                    formControlName="Grades" class="form-control cus-cntrl"
+                    [items]="grades"
+                    [multiple]=true
+                    [closeOnSelect]="false"
+                    [searchable]="false"
+                    bindLabel="cl_grade_name"
+                    placeholder="Select grade"
+                    [(ngModel)]="selectedGrade"
+                    [ngClass]="{ 'is-invalid': submitted && f.Grades.errors }"
+                    >
+                  </ng-select>
+                <div *ngIf="submitted && f.Grades.errors" class="invalid-feedback">
+                  <div *ngIf="f.Grades.errors.required">Grade is required</div>
+                </div>
+                <!-- <input type="password" class="form-control" id="password" autocomplete="current-password" placeholder="Password" value="12345678"> -->
+              </div>
+            </div>
+
+          </div>
+          <div class="mt-3">
+            <div class="example-button-row fl-right">
+              <button mat-raised-button color="primary" class="">Save</button>
+              <button mat-raised-button color="warn" class="" (click)="stuDivSwitch(0)">Close</button>
+              </div>
+          </div>
+        </form>
+
+      </div>
+
+    </div>
+    <div class="spacer"></div>
+  </div>
+
+  <div class="col-md-12 stretch-card">
+    <div class="card">
+      <div class="card-body">
+        <h6 class="card-title">Student List</h6>
+        <div class="table-responsive">
+          <ngx-datatable class="bootstrap" [rows]="rows" [loadingIndicator]="loadingIndicator"
+            [columnMode]="ColumnMode.force" [footerHeight]="50" [limit]="10" rowHeight="auto">
+
+            <ngx-datatable-column name="Student ID" prop="cl_user_user_id">
+              <ng-template let-row="row" ngx-datatable-cell-template>
+                {{row.cl_user_id}}
+              </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column name="First name" prop="cl_user_first_name">
+              <ng-template let-row="row" ngx-datatable-cell-template>
+                {{row.cl_user_first_name}}
+              </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column name="Last name" prop="cl_user_last_name">
+              <ng-template let-row="row" ngx-datatable-cell-template>
+                {{row.cl_user_last_name}}
+              </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column name="Phone" prop="cl_user_phone">
+              <ng-template let-row="row" ngx-datatable-cell-template>
+                {{row.cl_user_phone}}
+              </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column name="Email" prop="email">
+              <ng-template let-row="row" ngx-datatable-cell-template>
+                {{row.cl_user_email}}
+              </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column name="Grade" prop="cl_grade_name">
+              <ng-template let-row="row" ngx-datatable-cell-template>
+                {{row.cl_grade_name}}
+              </ng-template>
+            </ngx-datatable-column>
+
+
+            <ngx-datatable-column name="Action">
+              <ng-template let-row="row" ngx-datatable-cell-template>
+                <a [routerLink]="'/student-management/student-update'" [queryParams]="{'student' : row.cl_user_id}"><i class="feather icon-edit"></i></a>
+              </ng-template>
+            </ngx-datatable-column>
+          </ngx-datatable>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="page-wrapper full-page" *ngIf="!screeenAuth">
+  <div class="page-content d-flex align-items-center justify-content-center">
+
+    <div class="row w-100 mx-0 auth-page">
+      <div class="col-md-8 col-xl-6 mx-auto d-flex flex-column align-items-center">
+        <img src="assets/images/404.svg" class="img-fluid mb-2" alt="401">
+        <h1 class="font-weight-bold mb-22 mt-2 tx-80 text-muted">SORRY!</h1>
+          <h4 class="mb-2">You'r not Authorized. Please contact admin</h4>
+      </div>
+    </div>
+
+  </div>
+</div>
