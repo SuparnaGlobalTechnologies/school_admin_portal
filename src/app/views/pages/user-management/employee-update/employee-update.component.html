@@ -1,0 +1,127 @@
+<nav class="page-breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a routerLink=".">User-Management</a></li>
+    <li class="breadcrumb-item"><a routerLink="/user-management/employees">Employee List</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Employee Update</li>
+  </ol>
+</nav>
+<div class="row" *ngIf="screeenAuth">
+  <div class="card rounded col-sm-12">
+    <div class="card-body">
+      <div class="d-flex align-items-center justify-content-between mb-2">
+      </div>
+      <div class="mt-3">
+        <form class="forms-sample" [formGroup]="EmpUpdateForm" (ngSubmit)="onSubmit()">
+          <div class="row">
+            <div class="col-sm-4">
+              <div class="form-group">
+                <label for="EmpId">Employee ID</label>
+                <input type="text" disabled placeholder="Employee ID"
+                  formControlName="EmpId" class="form-control"
+                  [ngClass]="{ 'is-invalid': submitted && f.EmpId.errors }" />
+                <div *ngIf="submitted && f.EmpId.errors" class="invalid-feedback">
+                  <div *ngIf="f.EmpId.errors.required">Employee ID is required</div>
+                </div>
+              </div>
+              <!-- <input type="password" class="form-control" id="password" autocomplete="current-password" placeholder="Password" value="12345678"> -->
+            </div>
+            <div class="col-sm-4">
+              <div class="form-group">
+                <label for="EmpFirstName">First Name</label>
+                <input type="text" placeholder="First Name"
+                  formControlName="EmpFirstName" class="form-control"
+                  [ngClass]="{ 'is-invalid': submitted && f.EmpFirstName.errors }" />
+                <div *ngIf="submitted && f.EmpFirstName.errors" class="invalid-feedback">
+                  <div *ngIf="f.EmpFirstName.errors.required">First name is required</div>
+                </div>
+                <!-- <input type="password" class="form-control" id="password" autocomplete="current-password" placeholder="Password" value="12345678"> -->
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="form-group">
+                <label for="EmpLastname">Last Name</label>
+                <input type="text" placeholder="Last Name"
+                  formControlName="EmpLastName" class="form-control"
+                  [ngClass]="{ 'is-invalid': submitted && f.EmpLastName.errors }" />
+                <div *ngIf="submitted && f.EmpLastName.errors" class="invalid-feedback">
+                  <div *ngIf="f.EmpLastName.errors.required">Last name is required</div>
+                </div>
+                <!-- <input type="password" class="form-control" id="password" autocomplete="current-password" placeholder="Password" value="12345678"> -->
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="form-group">
+                <label for="EmpPhone">Phone</label>
+                <input type="text" placeholder="Phone"
+                  formControlName="EmpPhone" class="form-control"
+                  [ngClass]="{ 'is-invalid': submitted && f.EmpPhone.errors }" />
+                <div *ngIf="submitted && f.EmpPhone.errors" class="invalid-feedback">
+                  <div *ngIf="f.EmpPhone.errors.required">phone is required</div>
+                  <div *ngIf="f.EmpPhone.errors.pattern"> phone is Invalid</div>
+                </div>
+                <!-- <input type="password" class="form-control" id="password" autocomplete="current-password" placeholder="Password" value="12345678"> -->
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="form-group">
+                <label for="EmpEmail">Email</label>
+                <input type="text" placeholder="Email"
+                  formControlName="EmpEmail" class="form-control"
+                  [ngClass]="{ 'is-invalid': submitted && f.EmpEmail.errors }" />
+                <div *ngIf="submitted && f.EmpEmail.errors" class="invalid-feedback">
+                  <div *ngIf="f.EmpEmail.errors.required">Email is required</div>
+                  <div *ngIf="f.EmpEmail.errors.email"> Email is Invalid</div>
+                </div>
+                <!-- <input type="password" class="form-control" id="password" autocomplete="current-password" placeholder="Password" value="12345678"> -->
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="form-group">
+                <label for="Role">Role</label>
+                <ng-select
+                    formControlName="Role" class="form-control cus-cntrl"
+                    [items]="roles"
+                    [multiple]=false
+                    [closeOnSelect]="false"
+                    [searchable]="false"
+                    bindLabel="cl_role_name"
+                    placeholder="Select Role"
+                    [(ngModel)]="selectedRole"
+                    [ngClass]="{ 'is-invalid': submitted && f.Role.errors }"
+                    >
+                  </ng-select>
+                <div *ngIf="submitted && f.Role.errors" class="invalid-feedback">
+                  <div *ngIf="f.Role.errors.required">Role is required</div>
+                </div>
+                <!-- <input type="password" class="form-control" id="password" autocomplete="current-password" placeholder="Password" value="12345678"> -->
+              </div>
+            </div>
+          </div>
+          <div class="mt-3">
+            <button type="submit" class="btn btn-primary mr-2 mb-2 mb-md-0 btn-right">Update</button>
+            <button type="button" class="btn btn-primary mr-2 mb-2 mb-md-0 btn-right"
+              (click)="backToEmployees()">Back</button>
+
+            <!-- <button type="button" class="btn btn-outline-primary btn-icon-text mb-2 mb-md-0">
+            <i class="feather icon-twitter btn-icon-prepend"></i>
+            Login with twitter
+          </button> -->
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="page-wrapper full-page" *ngIf="!screeenAuth">
+  <div class="page-content d-flex align-items-center justify-content-center">
+
+    <div class="row w-100 mx-0 auth-page">
+      <div class="col-md-8 col-xl-6 mx-auto d-flex flex-column align-items-center">
+        <img src="assets/images/404.svg" class="img-fluid mb-2" alt="401">
+        <h1 class="font-weight-bold mb-22 mt-2 tx-80 text-muted">SORRY!</h1>
+          <h4 class="mb-2">You'r not Authorized. Please contact admin</h4>
+      </div>
+    </div>
+
+  </div>
+</div>

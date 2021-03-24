@@ -1,0 +1,58 @@
+<div class="row w-100 mx-0 auth-page">
+  <div class="col-md-8 col-xl-6 mx-auto">
+    <div class="card">
+      <div class="row">
+        <div class="col-md-4 pr-md-0">
+          <div class="auth-left-wrapper">
+
+          </div>
+        </div>
+        <div class="col-md-8 pl-md-0">
+          <div class="auth-form-wrapper px-4 py-5">
+            <a routerLink="." class="noble-ui-logo d-block mb-2">LOGO<span>HERE</span></a>
+            <h5 class="text-muted font-weight-normal mb-4">Welcome back! Log in to your account.</h5>
+            <form class="forms-sample" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+              <div class="form-group">
+                <label for="username">Email address</label>
+                <input type="email" class="form-control" id="username" placeholder="Email" value="admin@demo.com"
+                formControlName="username"
+                class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />
+                <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
+                    <div *ngIf="f.username.errors.required">Email is required</div>
+                </div>
+
+              </div>
+              <div class="form-group">
+                <label for="password">Password</label>
+                <show-hide-password size="lg" btnStyle="primary" [btnOutline]="false">
+                <input type="password" autocomplete="current-password" placeholder="Password" value="12345678"
+                formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+                </show-hide-password>
+                <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                    <div *ngIf="f.password.errors.required">Password is required</div>
+                </div>
+                <!-- <input type="password" class="form-control" id="password" autocomplete="current-password" placeholder="Password" value="12345678"> -->
+              </div>
+              <div class="form-check form-check-flat form-check-primary">
+                <label class="form-check-label">
+                  <input type="checkbox" class="form-check-input">
+                  <i class="input-frame"></i>
+                  Remember me
+                </label>
+              </div>
+              <div class="mt-3">
+                <button type="submit" class="btn btn-primary mr-2 mb-2 mb-md-0">Login</button>
+                <!-- <button type="button" class="btn btn-outline-primary btn-icon-text mb-2 mb-md-0">
+                  <i class="feather icon-twitter btn-icon-prepend"></i>
+                  Login with twitter
+                </button> -->
+              </div>
+              <a routerLink="/auth/forgot" class="d-block mt-3 text-muted">Forgot password? Click Here</a>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,235 @@
+<div *ngIf="screeenAuth">
+
+
+<div class="d-flex justify-content-between align-items-center flex-wrap grid-margin">
+  <div>
+    <h4 class="mb-3 mb-md-0">Welcome to Dashboard</h4>
+  </div>
+  <div class="d-flex align-items-center flex-wrap text-nowrap">
+    <div class="input-group dashboard-date mr-2 mb-2 mb-md-0 d-md-none d-xl-flex">
+      <div class="input-group-prepend">
+        <button class="btn btn-outline-primary btn-icon calendar" type="button" (click)="d.toggle()">
+          <i data-feather="calendar" appFeatherIcon></i>
+        </button>
+      </div>
+      <input class="form-control" placeholder="yyyy-mm-dd"
+          name="dp" [(ngModel)]="currentDate" ngbDatepicker #d="ngbDatepicker">
+    </div>
+    <!-- <button type="button" class="btn btn-outline-info btn-icon-text mr-2 d-none d-md-block">
+      <i class="btn-icon-prepend" data-feather="download" appFeatherIcon></i>
+      Import
+    </button>
+    <button type="button" class="btn btn-outline-primary btn-icon-text mr-2 mb-2 mb-md-0">
+      <i class="btn-icon-prepend" data-feather="printer" appFeatherIcon></i>
+      Print
+    </button> -->
+    <button type="button" class="btn btn-primary btn-icon-text mb-2 mb-md-0">
+      <i class="btn-icon-prepend" data-feather="download-cloud" appFeatherIcon></i>
+      Download Report
+    </button>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-12 col-xl-12 stretch-card">
+    <div class="row flex-grow">
+      <div class="col-md-4 grid-margin stretch-card">
+        <div class="card">
+          <div class="card-body">
+            <div class="d-flex justify-content-between align-items-baseline">
+              <h6 class="card-title mb-0">Clients</h6>
+              <div ngbDropdown class="mb-2">
+                <button ngbDropdownToggle class="btn p-0 no-dropdown-toggle-icon" type="button" id="dropdownMenuButton">
+                  <i class="icon-lg text-muted pb-3px" data-feather="more-horizontal" appFeatherIcon></i>
+                </button>
+                <div ngbDropdownMenu aria-labelledby="dropdownMenuButton">
+                  <a ngbDropdownItem class="d-flex align-items-center" href="" (click)="false"><i data-feather="eye" appFeatherIcon class="icon-sm mr-2"></i> <span class="">View</span></a>
+                  <a ngbDropdownItem class="d-flex align-items-center" href="" (click)="false"><i data-feather="edit-2" appFeatherIcon class="icon-sm mr-2"></i> <span class="">Edit</span></a>
+                  <a ngbDropdownItem class="d-flex align-items-center" href="" (click)="false"><i data-feather="trash" appFeatherIcon class="icon-sm mr-2"></i> <span class="">Delete</span></a>
+                  <a ngbDropdownItem class="d-flex align-items-center" href="" (click)="false"><i data-feather="printer" appFeatherIcon class="icon-sm mr-2"></i> <span class="">Print</span></a>
+                  <a ngbDropdownItem class="d-flex align-items-center" href="" (click)="false"><i data-feather="download" appFeatherIcon class="icon-sm mr-2"></i> <span class="">Download</span></a>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-6 col-md-12 col-xl-5">
+                <h3 class="mb-2">3,897</h3>
+                <div class="d-flex align-items-baseline">
+                  <p class="text-success">
+                    <span>+3.3%</span>
+                    <i data-feather="arrow-up" appFeatherIcon class="icon-sm mb-1"></i>
+                  </p>
+                </div>
+              </div>
+              <div class="col-6 col-md-12 col-xl-7">
+                <div class="mt-md-3 mt-xl-0">
+                  <apx-chart
+                    [series]="apexChart1Options.series"
+                    [colors]="apexChart1Options.colors"
+                    [chart]="apexChart1Options.chart"
+                    [markers]="apexChart1Options.markers"
+                    [stroke]="apexChart1Options.stroke"
+                    [tooltip]="apexChart1Options.tooltip"
+                  ></apx-chart>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 grid-margin stretch-card">
+        <div class="card">
+          <div class="card-body">
+            <div class="d-flex justify-content-between align-items-baseline">
+              <h6 class="card-title mb-0">Quizes</h6>
+              <div ngbDropdown class="mb-2">
+                <button ngbDropdownToggle class="btn p-0 no-dropdown-toggle-icon" type="button" id="dropdownMenuButton1">
+                  <i class="icon-lg text-muted pb-3px" data-feather="more-horizontal" appFeatherIcon></i>
+                </button>
+                <div ngbDropdownMenu aria-labelledby="dropdownMenuButton1">
+                  <a ngbDropdownItem class="d-flex align-items-center" href="" (click)="false"><i data-feather="eye" appFeatherIcon class="icon-sm mr-2"></i> <span class="">View</span></a>
+                  <a ngbDropdownItem class="d-flex align-items-center" href="" (click)="false"><i data-feather="edit-2" appFeatherIcon class="icon-sm mr-2"></i> <span class="">Edit</span></a>
+                  <a ngbDropdownItem class="d-flex align-items-center" href="" (click)="false"><i data-feather="trash" appFeatherIcon class="icon-sm mr-2"></i> <span class="">Delete</span></a>
+                  <a ngbDropdownItem class="d-flex align-items-center" href="" (click)="false"><i data-feather="printer" appFeatherIcon class="icon-sm mr-2"></i> <span class="">Print</span></a>
+                  <a ngbDropdownItem class="d-flex align-items-center" href="" (click)="false"><i data-feather="download" appFeatherIcon class="icon-sm mr-2"></i> <span class="">Download</span></a>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-6 col-md-12 col-xl-5">
+                <h3 class="mb-2">35,084</h3>
+                <div class="d-flex align-items-baseline">
+                  <p class="text-danger">
+                    <span>-2.8%</span>
+                    <i data-feather="arrow-down" appFeatherIcon class="icon-sm mb-1"></i>
+                  </p>
+                </div>
+              </div>
+              <div class="col-6 col-md-12 col-xl-7">
+                <div class="mt-md-3 mt-xl-0">
+                  <apx-chart
+                    [series]="apexChart2Options.series"
+                    [colors]="apexChart2Options.colors"
+                    [labels]="apexChart2Options.labels"
+                    [xaxis]="apexChart2Options.xaxis"
+                    [plotOptions]="apexChart2Options.plotOptions"
+                    [chart]="apexChart2Options.chart"
+                    [tooltip]="apexChart2Options.tooltip"
+                  ></apx-chart>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 grid-margin stretch-card">
+        <div class="card">
+          <div class="card-body">
+            <div class="d-flex justify-content-between align-items-baseline">
+              <h6 class="card-title mb-0">Growth</h6>
+              <div ngbDropdown class="mb-2">
+                <button ngbDropdownToggle class="btn p-0 no-dropdown-toggle-icon" type="button" id="dropdownMenuButton2">
+                  <i class="icon-lg text-muted pb-3px" data-feather="more-horizontal" appFeatherIcon></i>
+                </button>
+                <div ngbDropdownMenu aria-labelledby="dropdownMenuButton2">
+                  <a ngbDropdownItem class="d-flex align-items-center" href="" (click)="false"><i data-feather="eye" appFeatherIcon class="icon-sm mr-2"></i> <span class="">View</span></a>
+                  <a ngbDropdownItem class="d-flex align-items-center" href="" (click)="false"><i data-feather="edit-2" appFeatherIcon class="icon-sm mr-2"></i> <span class="">Edit</span></a>
+                  <a ngbDropdownItem class="d-flex align-items-center" href="" (click)="false"><i data-feather="trash" appFeatherIcon class="icon-sm mr-2"></i> <span class="">Delete</span></a>
+                  <a ngbDropdownItem class="d-flex align-items-center" href="" (click)="false"><i data-feather="printer" appFeatherIcon class="icon-sm mr-2"></i> <span class="">Print</span></a>
+                  <a ngbDropdownItem class="d-flex align-items-center" href="" (click)="false"><i data-feather="download" appFeatherIcon class="icon-sm mr-2"></i> <span class="">Download</span></a>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-6 col-md-12 col-xl-5">
+                <h3 class="mb-2">89.87%</h3>
+                <div class="d-flex align-items-baseline">
+                  <p class="text-success">
+                    <span>+2.8%</span>
+                    <i data-feather="arrow-up" appFeatherIcon class="icon-sm mb-1"></i>
+                  </p>
+                </div>
+              </div>
+              <div class="col-6 col-md-12 col-xl-7">
+                <div class="mt-md-3 mt-xl-0">
+                  <apx-chart
+                    [series]="apexChart3Options.series"
+                    [colors]="apexChart3Options.colors"
+                    [chart]="apexChart3Options.chart"
+                    [markers]="apexChart3Options.markers"
+                    [stroke]="apexChart3Options.stroke"
+                    [tooltip]="apexChart3Options.tooltip"
+                  ></apx-chart>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> <!-- row -->
+
+<div class="row">
+  <div class="col-12 col-xl-12 grid-margin stretch-card">
+    <div class="card overflow-hidden">
+      <div class="card-body">
+        <div class="d-flex justify-content-between align-items-baseline mb-4 mb-md-3">
+          <h6 class="card-title mb-0">Revenue</h6>
+          <div ngbDropdown>
+            <button ngbDropdownToggle class="btn p-0 no-dropdown-toggle-icon" type="button" id="dropdownMenuButton3">
+              <i class="icon-lg text-muted pb-3px" data-feather="more-horizontal" appFeatherIcon></i>
+            </button>
+            <div ngbDropdownMenu aria-labelledby="dropdownMenuButton3">
+              <a ngbDropdownItem class="d-flex align-items-center" href="" (click)="false"><i data-feather="eye" appFeatherIcon class="icon-sm mr-2"></i> <span class="">View</span></a>
+              <a ngbDropdownItem class="d-flex align-items-center" href="" (click)="false"><i data-feather="edit-2" appFeatherIcon class="icon-sm mr-2"></i> <span class="">Edit</span></a>
+              <a ngbDropdownItem class="d-flex align-items-center" href="" (click)="false"><i data-feather="trash" appFeatherIcon class="icon-sm mr-2"></i> <span class="">Delete</span></a>
+              <a ngbDropdownItem class="d-flex align-items-center" href="" (click)="false"><i data-feather="printer" appFeatherIcon class="icon-sm mr-2"></i> <span class="">Print</span></a>
+              <a ngbDropdownItem class="d-flex align-items-center" href="" (click)="false"><i data-feather="download" appFeatherIcon class="icon-sm mr-2"></i> <span class="">Download</span></a>
+            </div>
+          </div>
+        </div>
+        <div class="row align-items-start mb-2">
+          <div class="col-md-7">
+            <p class="text-muted tx-13 mb-3 mb-md-0">Revenue is the income that a business has from its normal business activities, usually from the sale of goods and services to customers.</p>
+          </div>
+          <div class="col-md-5 d-flex justify-content-md-end">
+            <div class="btn-group mb-3 mb-md-0" role="group" aria-label="Basic example">
+              <button type="button" class="btn btn-outline-primary">Today</button>
+              <button type="button" class="btn btn-outline-primary d-none d-md-block">Week</button>
+              <button type="button" class="btn btn-primary">Month</button>
+              <button type="button" class="btn btn-outline-primary">Year</button>
+            </div>
+          </div>
+        </div>
+        <div class="flot-wrapper">
+          <apx-chart
+            [series]="apexChart4Options.series"
+            [colors]="apexChart4Options.colors"
+            [chart]="apexChart4Options.chart"
+            [markers]="apexChart4Options.markers"
+            [grid]="apexChart4Options.grid"
+            [xaxis]="apexChart4Options.xaxis"
+            [yaxis]="apexChart4Options.yaxis"
+            [stroke]="apexChart4Options.stroke"
+            [tooltip]="apexChart4Options.tooltip"
+          ></apx-chart>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> <!-- row -->
+</div>
+<div class="page-wrapper full-page" *ngIf="!screeenAuth">
+  <div class="page-content d-flex align-items-center justify-content-center">
+
+    <div class="row w-100 mx-0 auth-page">
+      <div class="col-md-8 col-xl-6 mx-auto d-flex flex-column align-items-center">
+        <img src="assets/images/404.svg" class="img-fluid mb-2" alt="401">
+        <h1 class="font-weight-bold mb-22 mt-2 tx-80 text-muted">SORRY!</h1>
+          <h4 class="mb-2">You'r not Authorized. Please contact admin</h4>
+      </div>
+    </div>
+
+  </div>
+</div>

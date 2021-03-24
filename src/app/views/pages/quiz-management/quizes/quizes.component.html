@@ -1,0 +1,63 @@
+<nav class="page-breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a routerLink=".">Quiz-Management</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Quizes</li>
+  </ol>
+</nav>
+
+<div class="row" *ngIf="screeenAuth">
+  <div class="col-md-12 stretch-card">
+    <div class="card">
+      <div class="card-body">
+        <h6 class="card-title">Quiz List</h6>
+        <div class="table-responsive">
+          <ngx-datatable class="bootstrap" [rows]="rows" [loadingIndicator]="loadingIndicator"
+            [columnMode]="ColumnMode.force" [footerHeight]="50" [limit]="10" rowHeight="auto">
+
+            <ngx-datatable-column name="Quiz ID" prop="client_id">
+              <ng-template let-row="row" ngx-datatable-cell-template>
+                {{row.client_id}}
+              </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="Client ID" prop="client_key">
+              <ng-template let-row="row" ngx-datatable-cell-template>
+                {{row.client_key}}
+              </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column name="Quiz Date" prop="client_first_name">
+              <ng-template let-row="row" ngx-datatable-cell-template>
+                {{row.client_first_name}}
+              </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column name="Quiz status" prop="client_last_name">
+              <ng-template let-row="row" ngx-datatable-cell-template>
+                {{row.client_last_name}}
+              </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column name="Action">
+              <ng-template let-row="row" ngx-datatable-cell-template>
+                <a [routerLink]="'/client-management/client-update'" [queryParams]="{'client' : row.client_id}"><i class="feather icon-edit"></i></a>
+              </ng-template>
+            </ngx-datatable-column>
+          </ngx-datatable>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="page-wrapper full-page" *ngIf="!screeenAuth">
+  <div class="page-content d-flex align-items-center justify-content-center">
+
+    <div class="row w-100 mx-0 auth-page">
+      <div class="col-md-8 col-xl-6 mx-auto d-flex flex-column align-items-center">
+        <img src="assets/images/404.svg" class="img-fluid mb-2" alt="404">
+        <h1 class="font-weight-bold mb-22 mt-2 tx-80 text-muted">Oops</h1>
+        <h4 class="mb-2">You are authorized for this page</h4>
+      </div>
+    </div>
+
+  </div>
+</div>

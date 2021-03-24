@@ -1,0 +1,109 @@
+<nav class="page-breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a routerLink=".">User-Management</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Roles</li>
+  </ol>
+</nav>
+
+<div class="row" *ngIf="screeenAuth">
+  <div class="col-md-12 ">
+    <button mat-raised-button color="primary" class="fl-right" (click)="roleDivSwitch(1)">Create Role</button> <br><br>
+  </div>
+  <div class="col-md-12 " *ngIf="creatRoleDiv" @fade>
+    <div class="card">
+      <div class="card-body">
+        <h6 class="card-title">Role Name</h6>
+        <form class="forms-sample" [formGroup]="NewRoleForm" (ngSubmit)="onSubmit()">
+          <div class="row">
+            <div class="col-sm-4">
+              <div class="form-group">
+                <label for="RoleName">Role Name</label>
+                <input type="text" placeholder="Role Name"
+                  formControlName="RoleName" class="form-control"
+                  [ngClass]="{ 'is-invalid': submitted && f.RoleName.errors }" />
+                <div *ngIf="submitted && f.RoleName.errors" class="invalid-feedback">
+                  <div *ngIf="f.RoleName.errors.required">Role Name is required</div>
+                </div>
+              </div>
+              <!-- <input type="password" class="form-control" id="password" autocomplete="current-password" placeholder="Password" value="12345678"> -->
+            </div>
+            <div class="col-sm-4">
+              <div class="form-group">
+                <label for="Screens">Screens</label>
+                <ng-select
+                    formControlName="Screens" class="form-control cus-cntrl"
+                    [items]="screens"
+                    [multiple]=true
+                    [closeOnSelect]="false"
+                    [searchable]="false"
+                    bindLabel="screen_name"
+                    placeholder="Select screens"
+                    [(ngModel)]="selectedScreens"
+                    [ngClass]="{ 'is-invalid': submitted && f.Screens.errors }"
+                    >
+                  </ng-select>
+                <div *ngIf="submitted && f.Screens.errors" class="invalid-feedback">
+                  <div *ngIf="f.Screens.errors.required">Screens is required</div>
+                </div>
+                <!-- <input type="password" class="form-control" id="password" autocomplete="current-password" placeholder="Password" value="12345678"> -->
+              </div>
+            </div>
+          </div>
+          <div class="mt-3">
+            <div class="example-button-row fl-right">
+              <button mat-raised-button color="primary" class="">Save Role</button>
+              <button mat-raised-button color="warn" class="" (click)="roleDivSwitch(0)">Close</button>
+              </div>
+          </div>
+        </form>
+
+      </div>
+
+    </div>
+    <div class="spacer"></div>
+  </div>
+
+  <div class="col-md-12 stretch-card">
+    <div class="card">
+      <div class="card-body">
+        <h6 class="card-title">Role List</h6>
+        <div class="table-responsive">
+          <ngx-datatable class="bootstrap" [rows]="rows" [loadingIndicator]="loadingIndicator"
+            [columnMode]="ColumnMode.force" [footerHeight]="50" [limit]="10" rowHeight="auto">
+
+            <ngx-datatable-column name="Role ID" prop="cl_role_id">
+              <ng-template let-row="row" ngx-datatable-cell-template>
+                {{row.cl_role_id}}
+              </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column name="Role name" prop="cl_role_name">
+              <ng-template let-row="row" ngx-datatable-cell-template>
+                {{row.cl_role_name}}
+              </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column name="Action">
+              <ng-template let-row="row" ngx-datatable-cell-template>
+                <a [routerLink]="'/user-management/role-update'" [queryParams]="{'role' : row.cl_role_id}"><i class="feather icon-edit"></i></a>
+              </ng-template>
+            </ngx-datatable-column>
+          </ngx-datatable>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="page-wrapper full-page" *ngIf="!screeenAuth">
+  <div class="page-content d-flex align-items-center justify-content-center">
+
+    <div class="row w-100 mx-0 auth-page">
+      <div class="col-md-8 col-xl-6 mx-auto d-flex flex-column align-items-center">
+        <img src="assets/images/404.svg" class="img-fluid mb-2" alt="401">
+        <h1 class="font-weight-bold mb-22 mt-2 tx-80 text-muted">SORRY!</h1>
+          <h4 class="mb-2">You'r not Authorized. Please contact admin</h4>
+      </div>
+    </div>
+
+  </div>
+</div>

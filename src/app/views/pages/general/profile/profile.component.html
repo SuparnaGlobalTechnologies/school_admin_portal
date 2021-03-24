@@ -1,0 +1,128 @@
+<div class="profile-page tx-13">
+  <div class="row">
+    <div class="col-12 grid-margin">
+      <div class="profile-header">
+        <div class="cover">
+          <div class="gray-shade"></div>
+          <figure>
+            <img src="https://via.placeholder.com/1148x272" class="img-fluid" alt="profile cover">
+          </figure>
+          <div class="cover-body d-flex justify-content-between align-items-center">
+            <div>
+              <img class="profile-pic" src="https://via.placeholder.com/100x100" alt="profile">
+              <span class="profile-name">{{user.first_name}}{{user.last_name}}</span>
+            </div>
+            <!-- <div class="d-none d-md-block">
+              <button class="btn btn-primary btn-icon-text btn-edit-profile">
+                <i data-feather="edit" appFeatherIcon class="btn-icon-prepend"></i> Edit profile
+              </button>
+            </div> -->
+          </div>
+        </div>
+        <div class="header-links">
+          <ul class="links d-flex align-items-center mt-3 mt-md-0">
+            <li class="header-link-item d-flex align-items-center" [ngClass]="{'active': personalInfo}">
+              <i class="mr-1 icon-md" data-feather="columns" appFeatherIcon></i>
+              <a class="pt-1px d-none d-md-block" (click)='activePersonalInfo()'>Personal Info</a>
+            </li>
+            <!-- <li class="header-link-item ml-3 pl-3 border-left d-flex align-items-center" [ngClass]="{'active': addressInfo}">
+              <i class="mr-1 icon-md" data-feather="user" appFeatherIcon></i>
+              <a class="pt-1px d-none d-md-block" (click)='activeAddressInfo()'>Address</a>
+            </li> -->
+            <li class="header-link-item ml-3 pl-3 border-left d-flex align-items-center" [ngClass]="{'active': passwordInfo}">
+              <i class="mr-1 icon-md" data-feather="password" appFeatherIcon></i>
+              <a class="pt-1px d-none d-md-block" (click)='activePasswordInfo()'>Change Password</a>
+            </li>
+
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row profile-body">
+    <!-- left wrapper start -->
+    <div class="d-none d-md-block col-md-12 col-xl-12 left-wrapper">
+      <div class="card rounded"  *ngIf='personalInfo'>
+        <div class="card-body">
+          <div class="d-flex align-items-center justify-content-between mb-2">
+          </div>
+          <div class="mt-3">
+            <label class="tx-11 font-weight-bold mb-0 text-uppercase">Full Name:</label>
+            <p class="text-muted">{{user.first_name}} {{user.last_name}}</p>
+          </div>
+          <div class="mt-3">
+            <label class="tx-11 font-weight-bold mb-0 text-uppercase">Phone:</label>
+            <p class="text-muted">{{user.phone}}</p>
+          </div>
+          <div class="mt-3">
+            <label class="tx-11 font-weight-bold mb-0 text-uppercase">Email:</label>
+            <p class="text-muted">{{user.email}}</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- <div class="card rounded" *ngIf='addressInfo'>
+        <div class="card-body">
+          <div class="d-flex align-items-center justify-content-between mb-2">
+          </div>
+          <div class="mt-3">
+            <label class="tx-11 font-weight-bold mb-0 text-uppercase">Address:</label>
+            <p class="text-muted"></p>
+          </div>
+        </div>
+      </div> -->
+      <div class="card rounded col-sm-6" *ngIf='passwordInfo'>
+        <div class="card-body">
+          <div class="d-flex align-items-center justify-content-between mb-2">
+          </div>
+          <div class="mt-3">
+            <form class="forms-sample" [formGroup]="passwordForm" (ngSubmit)="onSubmit()">
+              <div class="form-group">
+                <label for="CurrentPassword">Current Password</label>
+                <show-hide-password size="lg" btnStyle="primary" [btnOutline]="false">
+                <input type="password" autocomplete="current-password" placeholder="Password" value=""
+                formControlName="CurrentPassword" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.CurrentPassword.errors }" />
+              </show-hide-password>
+                <div *ngIf="submitted && f.CurrentPassword.errors" class="invalid-feedback">
+                    <div *ngIf="f.CurrentPassword.errors.required">Current Password is required</div>
+                </div>
+                <!-- <input type="password" class="form-control" id="password" autocomplete="current-password" placeholder="Password" value="12345678"> -->
+              </div>
+              <div class="form-group">
+                <label for="NewPassword">New Password</label>
+                <show-hide-password size="lg" btnStyle="primary" [btnOutline]="false">
+                <input type="password" autocomplete="current-password" placeholder="Password" value=""
+                formControlName="NewPassword" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.NewPassword.errors }" />
+              </show-hide-password>
+                <div *ngIf="submitted && f.NewPassword.errors" class="invalid-feedback">
+                    <div *ngIf="f.NewPassword.errors.required">New Password is required</div>
+                </div>
+                <!-- <input type="password" class="form-control" id="password" autocomplete="current-password" placeholder="Password" value="12345678"> -->
+              </div>
+              <div class="form-group">
+                <label for="ConfirmPassword">Confirm Password</label>
+                <show-hide-password size="lg" btnStyle="primary" [btnOutline]="false">
+                <input type="password" autocomplete="current-password" placeholder="Password" value=""
+                formControlName="ConfirmPassword" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.ConfirmPassword.errors }" />
+              </show-hide-password>
+                <div *ngIf="submitted && f.ConfirmPassword.errors" class="invalid-feedback">
+                    <div *ngIf="f.ConfirmPassword.errors.required">Confirm Password is required</div>
+                    <div *ngIf="f.ConfirmPassword.errors.confirmedValidator">Password and Confirm Password must be match.</div>
+                </div>
+                <!-- <input type="password" class="form-control" id="password" autocomplete="current-password" placeholder="Password" value="12345678"> -->
+              </div>
+              <div class="mt-3">
+                <button type="submit" class="btn btn-primary  mb-2 mb-md-0 btn-right">Save</button>
+                <!-- <button type="button" class="btn btn-outline-primary btn-icon-text mb-2 mb-md-0">
+                  <i class="feather icon-twitter btn-icon-prepend"></i>
+                  Login with twitter
+                </button> -->
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

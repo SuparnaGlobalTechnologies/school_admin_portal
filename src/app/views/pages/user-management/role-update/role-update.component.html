@@ -1,0 +1,89 @@
+<nav class="page-breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a routerLink=".">User-Management</a></li>
+    <li class="breadcrumb-item"><a routerLink="/user-management/roles">Roles</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Role Update</li>
+  </ol>
+</nav>
+<div class="row" *ngIf="screeenAuth">
+  <div class="card rounded col-sm-12">
+    <div class="card-body">
+      <div class="d-flex align-items-center justify-content-between mb-2">
+      </div>
+      <div class="mt-3">
+        <form class="forms-sample" [formGroup]="RoleForm" (ngSubmit)="onSubmit()">
+          <div class="row">
+            <div class="col-sm-4">
+              <div class="form-group">
+                <label for="RoleId">Category ID</label>
+                <input type="text" disabled placeholder="Role ID"
+                  formControlName="RoleId" class="form-control"
+                  [ngClass]="{ 'is-invalid': submitted && f.RoleId.errors }" />
+                <div *ngIf="submitted && f.RoleId.errors" class="invalid-feedback">
+                  <div *ngIf="f.RoleId.errors.required">Role ID is required</div>
+                </div>
+              </div>
+              <!-- <input type="password" class="form-control" id="password" autocomplete="current-password" placeholder="Password" value="12345678"> -->
+            </div>
+            <div class="col-sm-4">
+              <div class="form-group">
+                <label for="RoleName">Role Name</label>
+                <input type="text" placeholder="Role Name"
+                  formControlName="RoleName" class="form-control"
+                  [ngClass]="{ 'is-invalid': submitted && f.RoleName.errors }" />
+                <div *ngIf="submitted && f.RoleName.errors" class="invalid-feedback">
+                  <div *ngIf="f.RoleName.errors.required">Role name is required</div>
+                </div>
+                <!-- <input type="password" class="form-control" id="password" autocomplete="current-password" placeholder="Password" value="12345678"> -->
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="form-group">
+                <label for="Screens">Screens</label>
+                <ng-select
+                    formControlName="Screens" class="form-control cus-cntrl"
+                    [items]="screens"
+                    [multiple]=true
+                    [closeOnSelect]="false"
+                    [searchable]="false"
+                    bindLabel="cl_screen_name"
+                    placeholder="Select screens"
+                    [(ngModel)]="selectedScreens"
+                    [ngClass]="{ 'is-invalid': submitted && f.Screens.errors }"
+                    >
+                  </ng-select>
+                <div *ngIf="submitted && f.Screens.errors" class="invalid-feedback">
+                  <div *ngIf="f.Screens.errors.required">Screens is required</div>
+                </div>
+                <!-- <input type="password" class="form-control" id="password" autocomplete="current-password" placeholder="Password" value="12345678"> -->
+              </div>
+            </div>
+          </div>
+          <div class="mt-3">
+            <button type="submit" class="btn btn-primary mr-2 mb-2 mb-md-0 btn-right">Update</button>
+            <button type="button" class="btn btn-primary mr-2 mb-2 mb-md-0 btn-right"
+              (click)="backToRoles()">Back</button>
+
+            <!-- <button type="button" class="btn btn-outline-primary btn-icon-text mb-2 mb-md-0">
+            <i class="feather icon-twitter btn-icon-prepend"></i>
+            Login with twitter
+          </button> -->
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="page-wrapper full-page" *ngIf="!screeenAuth">
+  <div class="page-content d-flex align-items-center justify-content-center">
+
+    <div class="row w-100 mx-0 auth-page">
+      <div class="col-md-8 col-xl-6 mx-auto d-flex flex-column align-items-center">
+        <img src="assets/images/404.svg" class="img-fluid mb-2" alt="401">
+        <h1 class="font-weight-bold mb-22 mt-2 tx-80 text-muted">SORRY!</h1>
+          <h4 class="mb-2">You'r not Authorized. Please contact admin</h4>
+      </div>
+    </div>
+
+  </div>
+</div>
